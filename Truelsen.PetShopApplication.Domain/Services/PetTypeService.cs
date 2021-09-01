@@ -33,5 +33,19 @@ namespace Truelsen.PetShopApplication.Domain.Services
         {
             return _repository.Delete(petType);
         }
+
+        public PetType Find(PetType type)
+        {
+            var allPetTypes = _repository.GetAll();
+            foreach (var petType in allPetTypes)
+            {
+                if (petType.Name.Equals(type.Name))
+                {
+                    return petType;
+                }
+
+            }
+            return null;
+        }
     }
 }

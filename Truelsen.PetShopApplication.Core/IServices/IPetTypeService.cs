@@ -12,5 +12,7 @@ namespace Truelsen.PetShopApplication.Core.IServices
         PetType Update(PetType petType);
 
         PetType Delete(PetType petType);
+
+        PetType Find(PetType type);
     }
 }

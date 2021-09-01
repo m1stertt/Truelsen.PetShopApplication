@@ -14,10 +14,13 @@ namespace Truelsen.PetShopApplication.UI
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddScoped<IPetRepository, PetRepositoryMemory>();
             serviceCollection.AddScoped<IPetService, PetService>();
+            serviceCollection.AddScoped<IPetTypeRepository, PetTypeRepositoryInMemory>();
+            serviceCollection.AddScoped<IPetTypeService, PetTypeService>();
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
-            var service = serviceProvider.GetRequiredService<IPetService>();
-            var menu = new Menu(service);
+            var petService = serviceProvider.GetRequiredService<IPetService>();
+            var petTypeService = serviceProvider.GetRequiredService<IPetTypeService>();
+            var menu = new Menu(petService, petTypeService);
             menu.Start();
         }
     }

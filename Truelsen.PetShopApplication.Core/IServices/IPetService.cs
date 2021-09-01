@@ -14,5 +14,6 @@ namespace Truelsen.PetShopApplication.Core.IServices
         Pet Update(Pet pet);
 
         List<Pet> Find(string type);
+        
     }
 }

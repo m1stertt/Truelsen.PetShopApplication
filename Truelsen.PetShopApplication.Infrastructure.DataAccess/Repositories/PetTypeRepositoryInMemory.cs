@@ -8,6 +8,16 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
     {
         private static List<PetType> _petTypeTable = new List<PetType>();
         private static int _id = 1;
+
+        public PetTypeRepositoryInMemory()
+        {
+            PetType petType = new PetType()
+            {
+                Id = _id++,
+                Name = "Goat",
+            };
+        }
+
         public PetType Add(PetType petType)
         {
             petType.Id = _id++;

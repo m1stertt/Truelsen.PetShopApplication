@@ -15,7 +15,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
         {
             Pet pet1 = new Pet()
             {
-                Id = 1,
+                Id = _id++,
                 Name = "Vuffi",
                 Birthdate = DateTime.Now,
                 Color = "Black",

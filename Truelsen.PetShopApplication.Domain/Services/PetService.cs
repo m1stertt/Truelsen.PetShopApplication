@@ -6,8 +6,6 @@ using Truelsen.PetShopApplication.Domain.IRepositories;
 namespace Truelsen.PetShopApplication.Domain.Services
 {
     public class PetService : IPetService
-
-
     {
         private readonly IPetRepository _repository;
 
@@ -30,7 +28,7 @@ namespace Truelsen.PetShopApplication.Domain.Services
         {
             return _repository.Update(pet);
         }
-        
+
         public Pet Delete(int petId)
         {
             return _repository.Delete(petId);
@@ -42,7 +40,7 @@ namespace Truelsen.PetShopApplication.Domain.Services
             List<Pet> results = new List<Pet>();
             foreach (var pet in allPets)
             {
-                if (pet.Type.Name == type)
+                if (pet.Type.Name.Equals(type))
                 {
                     results.Add(pet);
                 }
@@ -50,7 +48,5 @@ namespace Truelsen.PetShopApplication.Domain.Services
 
             return results;
         }
-
-
     }
 }
