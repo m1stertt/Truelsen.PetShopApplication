@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Truelsen.PetShopApplication.Core.IServices;
 using Truelsen.PetShopApplication.Core.Models;
 using Truelsen.PetShopApplication.Domain.IRepositories;
@@ -47,6 +48,12 @@ namespace Truelsen.PetShopApplication.Domain.Services
             }
 
             return results;
+        }
+
+        public List<Pet> SortByType(string type)
+        {
+            List<Pet> sortedList = GetAll().OrderBy(pet => pet.Type.Name).ToList();
+            return sortedList;
         }
     }
 }

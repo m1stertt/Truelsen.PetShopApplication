@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Truelsen.PetShopApplication.Core.IServices;
 using Truelsen.PetShopApplication.Core.Models;
 
@@ -58,7 +59,7 @@ namespace Truelsen.PetShopApplication.UI
                         UpdatePetDetails();
                         break;
                     case 6:
-                        // SortPetsByType();
+                        SortPetsByType();
                         break;
                     case 7:
                         // ShowCheapestPets();
@@ -71,6 +72,14 @@ namespace Truelsen.PetShopApplication.UI
                 PrintDivider();
                 ShowMainMenu();
             }
+        }
+
+        private void SortPetsByType()
+        {
+            Console.WriteLine("Enter the type of pet you want to sort by.");
+            var type = Console.ReadLine();
+            _petService.SortByType(type);
+
         }
 
         private void SearchPetByType()
@@ -138,16 +147,15 @@ namespace Truelsen.PetShopApplication.UI
             var price = Console.ReadLine();
             if (birthdate == null) return;
             
+            
+            // Checking if the petType is already available in the repository.
+            // If not we will create a new type.
             var petType = new PetType()
             {
                 Name = type
             };
-            petType = _petTypeService.Find(petType);
-            if (petType == null)
-            {
-                petType = _petTypeService.Create(petType);
-            }
-            
+            petType = _petTypeService.Find(petType) ?? _petTypeService.Create(petType);
+
             var pet = new Pet()
             {
                 Name = petName,
