@@ -35,7 +35,7 @@ namespace Truelsen.PetShopApplication.RestAPI
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo {Title = "Truelsen.PetShopApplication.RestAPI", Version = "v1"});
+                c.SwaggerDoc("v1", new OpenApiInfo {Title = "Truelsen.PetShopApplication.PetRestAPI", Version = "v1"});
             });
         }
 
@@ -47,7 +47,7 @@ namespace Truelsen.PetShopApplication.RestAPI
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c =>
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Truelsen.PetShopApplication.RestAPI v1"));
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Truelsen.PetShopApplication.PetRestAPI v1"));
             }
 
             app.UseHttpsRedirection();

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Truelsen.PetShopApplication.Core.IServices;
 using Truelsen.PetShopApplication.Core.Models;
 
@@ -30,7 +26,7 @@ namespace Truelsen.PetShopApplication.RestAPI.Controllers
         }
         
         // Find pet by type.
-        [HttpGet("{id}")]
+        [HttpGet("{type}")]
         public ActionResult<IEnumerable<Pet>> ReadByType(string type)
         {
             if (string.IsNullOrEmpty(type))
@@ -42,9 +38,9 @@ namespace Truelsen.PetShopApplication.RestAPI.Controllers
         
 
         
-        // Add new Pet.
+        // Post new Pet.
         [HttpPost]  
-        public ActionResult<Pet> Create(Pet pet)
+        public ActionResult<Pet> Post(Pet pet)
         {
             if (pet == null)
             {
@@ -54,7 +50,7 @@ namespace Truelsen.PetShopApplication.RestAPI.Controllers
             return Ok(_petService.Create(pet));
         }
         
-        // Update pet
+        // Put pet
         [HttpPut("{id}")]  
         public ActionResult<Pet> Update(int id, Pet pet)
         {
@@ -66,23 +62,18 @@ namespace Truelsen.PetShopApplication.RestAPI.Controllers
             return Ok(_petService.Update(pet));
         }
 
+        // Delete pet
         [HttpDelete("{id}")]
-        public ActionResult<Pet>  Delete(int id)
+        public ActionResult<Pet> Delete(int id)
         {
             if (id == 0)
             {
-                return BadRequest("An id is needed to update a pet.");
+                return BadRequest("An id is needed to delete a pet.");
             }
 
             return Ok(_petService.Delete(id));
         }
-        
-        
-        
-        
-        
-        
-        
+
     }
         
     }

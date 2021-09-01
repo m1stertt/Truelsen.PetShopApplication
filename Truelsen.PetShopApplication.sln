@@ -14,7 +14,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Truelsen.PetShopApplication
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Truelsen.PetShopApplication.Core", "Truelsen.PetShopApplication.Core\Truelsen.PetShopApplication.Core.csproj", "{8FA4416E-873A-4B0C-AD78-A6FE2BAD9E80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Truelsen.PetShopApplication.RestAPI", "Truelsen.PetShopApplication.RestAPI\Truelsen.PetShopApplication.RestAPI.csproj", "{2ACCADF6-1DA3-4F58-9B73-A47FF250BCAC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Truelsen.PetShopApplication.PetRestAPI", "Truelsen.PetShopApplication.PetRestAPI\Truelsen.PetShopApplication.PetRestAPI.csproj", "{2ACCADF6-1DA3-4F58-9B73-A47FF250BCAC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -11,6 +11,8 @@ namespace Truelsen.PetShopApplication.UI
         private IPetService _petService;
         private IPetTypeService _petTypeService;
 
+        #region MenuStrings
+
         // List of menu choice strings
         private string[] _menuChoices =
         {
@@ -21,13 +23,9 @@ namespace Truelsen.PetShopApplication.UI
             "Update Pet Details",
             "Sort Pets by Price",
             "$$ 5 Cheapest Pets $$*"
-        };
+        };       
 
-        public Menu(IPetService petService, IPetTypeService petTypeService)
-        {
-            _petService = petService;
-            _petTypeService = petTypeService;
-        }
+        #endregion
 
         public void Start()
         {
@@ -35,6 +33,18 @@ namespace Truelsen.PetShopApplication.UI
             ShowMainMenu();
             StartMenuLoop();
         }
+
+        #region Constructor
+
+        public Menu(IPetService petService, IPetTypeService petTypeService)
+        {
+            _petService = petService;
+            _petTypeService = petTypeService;
+        }
+
+        #endregion
+
+        #region StartMenuLoop
 
         private void StartMenuLoop()
         {
@@ -62,7 +72,7 @@ namespace Truelsen.PetShopApplication.UI
                         SortPetsByType();
                         break;
                     case 7:
-                        // ShowCheapestPets();
+                        ShowCheapestPets();
                         break;
                     default:
                         TryValidInput();
@@ -74,14 +84,26 @@ namespace Truelsen.PetShopApplication.UI
             }
         }
 
+        #endregion
+
+
+        private void ShowCheapestPets()
+        {
+            throw new NotImplementedException();
+        }
+
         private void SortPetsByType()
         {
             Console.WriteLine("Enter the type of pet you want to sort by.");
             var type = Console.ReadLine();
-            _petService.SortByType(type);
-
+            var results = _petService.SortByType(type);
+            foreach (var pet in results)
+            {
+                Console.WriteLine(
+                    $"{pet.Id}{pet.Name}, {pet.Birthdate.ToString()}, {pet.Color}, {pet.Price}, {pet.Type.Name}, {pet.SoldDate.ToString()}");
+            }
         }
-
+        
         private void SearchPetByType()
         {
             Console.WriteLine("Enter the Type of Pet you want to search for.");
@@ -91,19 +113,6 @@ namespace Truelsen.PetShopApplication.UI
                 Console.WriteLine(
                     $"{pet.Id}{pet.Name}, {pet.Birthdate.ToString()}, {pet.Color}, {pet.Price}, {pet.Type.Name}, {pet.SoldDate.ToString()}");
             }
-        }
-
-
-        private List<Pet> GetSearchMenuInput()
-        {
-            var searchType = Console.ReadLine();
-            List<Pet> results = _petService.Find(searchType);
-            return results;
-        }
-
-        private void TryValidInput()
-        {
-            Console.WriteLine("Please enter a valid choice.");
         }
 
         private void UpdatePetDetails()
@@ -132,6 +141,8 @@ namespace Truelsen.PetShopApplication.UI
             }
         }
 
+        #region SellPet
+
         private void SellPet()
         {
             Console.Write("Enter name of Pet: ");
@@ -146,8 +157,8 @@ namespace Truelsen.PetShopApplication.UI
             Console.WriteLine("Enter Price of the Pet: ");
             var price = Console.ReadLine();
             if (birthdate == null) return;
-            
-            
+
+
             // Checking if the petType is already available in the repository.
             // If not we will create a new type.
             var petType = new PetType()
@@ -169,14 +180,11 @@ namespace Truelsen.PetShopApplication.UI
             var newPet = _petService.Create(pet);
             Console.WriteLine("Pet with the following Properties was sold to the PetShop - ");
             PrintPetDetails(newPet);
-        }
+        }      
 
-        public void PrintPetDetails(Pet pet)
-        {
-            Console.WriteLine(
-                $"Id: {pet.Id}, Name: {pet.Name}, Birthdate: {pet.Birthdate.ToString()}, Color: {pet.Color}," +
-                $" Price: {pet.Price}, Pet Type: {pet.Type.Name}, Sold Date: {pet.SoldDate.ToString()}");
-        }
+        #endregion
+
+        #region Input
 
         private int GetSelectedMainMenuChoice()
         {
@@ -188,7 +196,18 @@ namespace Truelsen.PetShopApplication.UI
             }
 
             return -1;
+        }       
+
+        private List<Pet> GetSearchMenuInput()
+        {
+            var searchType = Console.ReadLine();
+            List<Pet> results = new List<Pet>(_petService.Find(searchType));
+            return results;
         }
+        
+        #endregion
+
+        #region Printing
 
         private void ShowMainMenu()
         {
@@ -220,5 +239,18 @@ namespace Truelsen.PetShopApplication.UI
         {
             Console.WriteLine("------------------------------------------------");
         }
+        
+        public void PrintPetDetails(Pet pet)
+        {
+            Console.WriteLine(
+                $"Id: {pet.Id}, Name: {pet.Name}, Birthdate: {pet.Birthdate.ToString()}, Color: {pet.Color}," +
+                $" Price: {pet.Price}, Pet Type: {pet.Type.Name}, Sold Date: {pet.SoldDate.ToString()}");
+        }
+        private void TryValidInput()
+        {
+            Console.WriteLine("Please enter a valid choice.");
+        }
+        #endregion
+
     }
 }
