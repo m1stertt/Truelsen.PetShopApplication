@@ -33,12 +33,16 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
 
         public PetType Update(PetType petType)
         {
-            return _petTypeTable.Find(petTypeId => petTypeId.Id == petType.Id);
+            PetType foundPetType =_petTypeTable.Find(petTypeId => petTypeId.Id == petType.Id);
+            _petTypeTable.Remove(foundPetType);
+            return foundPetType;
         }
 
         public PetType Delete(PetType petType)
         {
-            return _petTypeTable.Find(petTypeId => petTypeId.Id == petType.Id);
+            PetType foundPetType =_petTypeTable.Find(petTypeId => petTypeId.Id == petType.Id);
+            foundPetType = petType;
+            return foundPetType;
         }
     }
 }

@@ -90,7 +90,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
                 SoldDate = DateTime.Now
                 
             };
-            _petTable.Add(pet1);
+            _petTable.Add(pet2);
             Pet pet3 = new Pet()
             {
                 Id = _id++,
@@ -105,7 +105,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
                 SoldDate = DateTime.Now
                 
             };
-            _petTable.Add(pet1);
+            _petTable.Add(pet3);
             Pet pet4 = new Pet()
             {
                 Id = _id++,
@@ -120,7 +120,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
                 SoldDate = DateTime.Now
                 
             };
-            _petTable.Add(pet1);
+            _petTable.Add(pet4);
         }
 
         #endregion
