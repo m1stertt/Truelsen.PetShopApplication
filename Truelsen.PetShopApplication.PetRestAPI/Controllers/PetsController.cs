@@ -33,7 +33,7 @@ namespace Truelsen.PetShopApplication.RestAPI.Controllers
             {
                 return BadRequest("Name of the type is required to find by type.");
             }
-            return Ok(_petService.Find(type));
+            return Ok(_petService.FindByType(type));
         }
         
 

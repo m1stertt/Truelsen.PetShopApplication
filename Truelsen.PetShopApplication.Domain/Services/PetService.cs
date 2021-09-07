@@ -35,7 +35,7 @@ namespace Truelsen.PetShopApplication.Domain.Services
             return _repository.Delete(petId);
         }
 
-        public List<Pet> Find(string type)
+        public List<Pet> FindByType(string type)
         {
             var allPets = _repository.GetAll();
             List<Pet> results = new List<Pet>();
@@ -52,8 +52,39 @@ namespace Truelsen.PetShopApplication.Domain.Services
 
         public List<Pet> SortByType(string type)
         {
-            List<Pet> sortedList = GetAll().OrderBy(pet => pet.Type.Name).ToList();
+            var allPets = _repository.GetAll();
+            List<Pet> results = new List<Pet>();
+            foreach (var pet in allPets)
+            {
+                if (pet.Type.Name.Equals(type))
+                {
+                    results.Add(pet);
+                }
+            }
+
+            return results;
+        }
+
+        public List<Pet> SortByPrice()
+        {
+            List<Pet> sortedList = GetAll().OrderBy(pet => pet.Price).ToList();
             return sortedList;
+        }
+
+        
+        
+        public Pet FindById(int id)
+        {
+            var allPets = _repository.GetAll();
+            foreach (var pet in allPets)
+            {
+                if (pet.Id == id)
+                {
+                    return pet;
+                }
+            }
+
+            return null;
         }
     }
 }

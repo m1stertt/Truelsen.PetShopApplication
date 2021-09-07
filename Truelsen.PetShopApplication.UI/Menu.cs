@@ -17,13 +17,13 @@ namespace Truelsen.PetShopApplication.UI
         private string[] _menuChoices =
         {
             "Show All Pets",
-            "Search by Type",
+            "Sort Pets by Price",
             "Sell Pet",
             "Buy Pet",
             "Update Pet Details",
-            "Sort Pets by Price",
+            "Search by Type",
             "$$ 5 Cheapest Pets $$*"
-        };       
+        };
 
         #endregion
 
@@ -57,7 +57,7 @@ namespace Truelsen.PetShopApplication.UI
                         ShowAllPets();
                         break;
                     case 2:
-                        SearchPetByType();
+                        SortByPrice();
                         break;
                     case 3:
                         SellPet();
@@ -94,30 +94,46 @@ namespace Truelsen.PetShopApplication.UI
 
         private void SortPetsByType()
         {
-            Console.WriteLine("Enter the type of pet you want to sort by.");
-            var type = Console.ReadLine();
-            var results = _petService.SortByType(type);
+            var results = GetTypeSearch();
+            Console.WriteLine($"All {results.First().Type.Name}s in database: ");
             foreach (var pet in results)
             {
                 Console.WriteLine(
                     $"{pet.Id}{pet.Name}, {pet.Birthdate.ToString()}, {pet.Color}, {pet.Price}, {pet.Type.Name}, {pet.SoldDate.ToString()}");
             }
         }
-        
-        private void SearchPetByType()
+
+        private void SortByPrice()
         {
-            Console.WriteLine("Enter the Type of Pet you want to search for.");
-            List<Pet> result = GetSearchMenuInput();
+            List<Pet> result = GetPriceSorted();
             foreach (var pet in result)
             {
-                Console.WriteLine(
-                    $"{pet.Id}{pet.Name}, {pet.Birthdate.ToString()}, {pet.Color}, {pet.Price}, {pet.Type.Name}, {pet.SoldDate.ToString()}");
+                PrintPetDetails(pet);
             }
+        }
+
+        private List<Pet> GetPriceSorted()
+        {
+            var results = _petService.SortByPrice();
+            return results;
         }
 
         private void UpdatePetDetails()
         {
-            throw new NotImplementedException();
+            Console.Write("Enter Id of the Pet you want to update: ");
+            if (int.TryParse(Console.ReadLine(), out var id))
+            {
+                Pet pet = new Pet();
+                pet = _petService.FindById(id);
+                var updatedPet = GetPetDetailsInput();
+                pet.Name = updatedPet.Name;
+                pet.Type = updatedPet.Type;
+                pet.Price = updatedPet.Price;
+                pet.Birthdate = updatedPet.Birthdate;
+                pet.Color = updatedPet.Color;
+                pet.SoldDate = updatedPet.SoldDate;
+                _petService.Update(pet);
+            }
         }
 
         private void BuyPet()
@@ -145,18 +161,41 @@ namespace Truelsen.PetShopApplication.UI
 
         private void SellPet()
         {
+            var pet = GetPetDetailsInput();
+
+            var newPet = _petService.Create(pet);
+            Console.WriteLine("Pet with the following Properties was sold to the PetShop - ");
+            PrintPetDetails(newPet);
+        }
+
+        #endregion
+
+        #region Input
+
+        private Pet GetPetDetailsInput()
+        {
             Console.Write("Enter name of Pet: ");
             var petName = Console.ReadLine();
+            InputStringValidation(petName);
+
             Console.Write("Enter Type of Pet: ");
             string type = Console.ReadLine();
-            Console.WriteLine("Enter birthdate in the following format: MM/dd/yyyy: ");
+            InputStringValidation(type);
+
+            Console.WriteLine("Enter birthdate in the following format: dd/MM/yyyy: ");
             var birthdate = @Console.ReadLine();
+            
+
             var soldDate = DateTime.Now;
             Console.WriteLine("Enter Color of the Pet: ");
             var color = Console.ReadLine();
+
+
             Console.WriteLine("Enter Price of the Pet: ");
             var price = Console.ReadLine();
-            if (birthdate == null) return;
+
+
+            if (birthdate == null) return null;
 
 
             // Checking if the petType is already available in the repository.
@@ -176,15 +215,27 @@ namespace Truelsen.PetShopApplication.UI
                 Type = petType,
                 SoldDate = DateTime.Now
             };
+            return pet;
+        }
 
-            var newPet = _petService.Create(pet);
-            Console.WriteLine("Pet with the following Properties was sold to the PetShop - ");
-            PrintPetDetails(newPet);
-        }      
+        private void InputStringValidation(string inputString)
+        {
+            while (string.IsNullOrEmpty(inputString))
+            {
+                Console.WriteLine("Name can't be empty! Input pet name once more");
+            }
+        }
 
-        #endregion
+        private void InputDateValidation(string inputString)
+        {
+            DateTime temp;
+            if(DateTime.TryParse(inputString, out temp ))
+            {
+                temp = Convert.ToDateTime(inputString);
+            }
 
-        #region Input
+
+        }
 
         private int GetSelectedMainMenuChoice()
         {
@@ -196,15 +247,16 @@ namespace Truelsen.PetShopApplication.UI
             }
 
             return -1;
-        }       
+        }
 
-        private List<Pet> GetSearchMenuInput()
+        private List<Pet> GetTypeSearch()
         {
+            Console.Write("Enter the Type of Pet you want to search for: ");
             var searchType = Console.ReadLine();
-            List<Pet> results = new List<Pet>(_petService.Find(searchType));
+            List<Pet> results = new List<Pet>(_petService.SortByType(searchType));
             return results;
         }
-        
+
         #endregion
 
         #region Printing
@@ -239,18 +291,19 @@ namespace Truelsen.PetShopApplication.UI
         {
             Console.WriteLine("------------------------------------------------");
         }
-        
+
         public void PrintPetDetails(Pet pet)
         {
             Console.WriteLine(
                 $"Id: {pet.Id}, Name: {pet.Name}, Birthdate: {pet.Birthdate.ToString()}, Color: {pet.Color}," +
                 $" Price: {pet.Price}, Pet Type: {pet.Type.Name}, Sold Date: {pet.SoldDate.ToString()}");
         }
+
         private void TryValidInput()
         {
             Console.WriteLine("Please enter a valid choice.");
         }
-        #endregion
 
+        #endregion
     }
 }
