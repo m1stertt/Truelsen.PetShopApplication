@@ -11,17 +11,14 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
     {
         private static List<Pet> _petTable = new List<Pet>();
         private static int _id = 1;
-        private static bool _hasInitializedData = false;
+        // private static bool _hasInitializedData = false;
 
         #region Constructor
 
         public PetRepositoryMemory()
         {
-            if (!_hasInitializedData)
-            {
-                InitializeFakeData();
-                _hasInitializedData = true;
-            }
+            if (_id > 1) return;
+            InitializeFakeData();
 
         }
 
@@ -51,7 +48,11 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
         public Pet Update(Pet pet)
         {
             Pet foundPet = _petTable.Find(petId => petId.Id == pet.Id);
-            foundPet = pet;
+            foundPet.Name = pet.Name;
+            foundPet.Type = pet.Type;
+            foundPet.Birthdate = pet.Birthdate;
+            foundPet.Color = pet.Color;
+            foundPet.Price = pet.Price;
             return foundPet;
         } 
 

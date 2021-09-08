@@ -30,13 +30,15 @@ namespace Truelsen.PetShopApplication.RestAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IPetRepository, PetRepositoryMemory>();
-            services.AddScoped<IPetService, PetService>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "Truelsen.PetShopApplication.PetRestAPI", Version = "v1"});
             });
+            services.AddScoped<IPetRepository, PetRepositoryMemory>();
+            services.AddScoped<IPetService, PetService>();
+            services.AddScoped<IPetTypeRepository, PetTypeRepositoryInMemory>();
+            services.AddScoped<IPetTypeService, PetTypeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

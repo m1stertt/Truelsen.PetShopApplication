@@ -22,7 +22,7 @@ namespace Truelsen.PetShopApplication.UI
             "Buy Pet",
             "Update Pet Details",
             "Search by Type",
-            "$$ 5 Cheapest Pets $$*"
+            "$$ 5 Cheapest Pets $$"
         };
 
         #endregion
@@ -89,7 +89,11 @@ namespace Truelsen.PetShopApplication.UI
 
         private void ShowCheapestPets()
         {
-            throw new NotImplementedException();
+            List<Pet> result = GetPriceSorted();
+            for (int i = 0; i < 4; i++)
+            {
+                PrintPetDetails(result[i]);
+            }
         }
 
         private void SortPetsByType()
@@ -176,27 +180,38 @@ namespace Truelsen.PetShopApplication.UI
         {
             Console.Write("Enter name of Pet: ");
             var petName = Console.ReadLine();
-            InputStringValidation(petName);
+            while (!InputStringValidation(petName))
+            {
+                petName = Console.ReadLine();
+            }
 
             Console.Write("Enter Type of Pet: ");
             string type = Console.ReadLine();
-            InputStringValidation(type);
+            while (!InputStringValidation(type))
+            {
+                type = Console.ReadLine();
+            }
 
             Console.WriteLine("Enter birthdate in the following format: dd/MM/yyyy: ");
             var birthdate = @Console.ReadLine();
-            
+            while (!InputDateValidation(birthdate))
+            {
+                birthdate = Console.ReadLine();
+            }
 
-            var soldDate = DateTime.Now;
             Console.WriteLine("Enter Color of the Pet: ");
             var color = Console.ReadLine();
-
+            while (!InputStringValidation(color))
+            {
+                color = Console.ReadLine();
+            }
 
             Console.WriteLine("Enter Price of the Pet: ");
             var price = Console.ReadLine();
-
-
-            if (birthdate == null) return null;
-
+            while (!InputDoubleValidation(price))
+            {
+                price = Console.ReadLine();
+            }
 
             // Checking if the petType is already available in the repository.
             // If not we will create a new type.
@@ -218,23 +233,37 @@ namespace Truelsen.PetShopApplication.UI
             return pet;
         }
 
-        private void InputStringValidation(string inputString)
+        private bool InputDoubleValidation(string price)
+        {
+            while (string.IsNullOrEmpty(price) || !double.TryParse(price, out var temp))
+            {
+                Console.WriteLine("Price can't be empty and has to be a number! Input price once more: ");
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool InputStringValidation(string inputString)
         {
             while (string.IsNullOrEmpty(inputString))
             {
-                Console.WriteLine("Name can't be empty! Input pet name once more");
+                Console.WriteLine("Name can't be empty! Input pet name once more: ");
+                return false;
             }
+
+            return true;
         }
 
-        private void InputDateValidation(string inputString)
+        private bool InputDateValidation(string inputString)
         {
-            DateTime temp;
-            if(DateTime.TryParse(inputString, out temp ))
+            if (!DateTime.TryParse(inputString, out var temp))
             {
-                temp = Convert.ToDateTime(inputString);
+                Console.WriteLine("Date can't be empty or or in wrong format. Try again in the format: dd/MM/yyyy: ");
+                return false;
             }
 
-
+            return true;
         }
 
         private int GetSelectedMainMenuChoice()

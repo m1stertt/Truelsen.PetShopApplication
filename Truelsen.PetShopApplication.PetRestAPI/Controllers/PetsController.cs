@@ -54,11 +54,12 @@ namespace Truelsen.PetShopApplication.RestAPI.Controllers
         [HttpPut("{id}")]  
         public ActionResult<Pet> Update(int id, Pet pet)
         {
-            if (id == 0)
+            if (id < 1 || id != pet.Id)
             {
-                return BadRequest("An id is needed to update a pet.");
+                return BadRequest("Correct id is needed to update a pet.");
             }
 
+            
             return Ok(_petService.Update(pet));
         }
 
@@ -68,7 +69,7 @@ namespace Truelsen.PetShopApplication.RestAPI.Controllers
         {
             if (id == 0)
             {
-                return BadRequest("An id is needed to delete a pet.");
+                return BadRequest("Correct id is needed to update a pet.");
             }
 
             return Ok(_petService.Delete(id));
