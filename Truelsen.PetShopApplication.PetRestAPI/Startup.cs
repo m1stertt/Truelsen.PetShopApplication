@@ -39,6 +39,8 @@ namespace Truelsen.PetShopApplication.RestAPI
             services.AddScoped<IPetService, PetService>();
             services.AddScoped<IPetTypeRepository, PetTypeRepositoryInMemory>();
             services.AddScoped<IPetTypeService, PetTypeService>();
+            services.AddScoped<IOwnerRepository, OwnerRepositoryInMemory>();
+            services.AddScoped<IOwnerService, OwnerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

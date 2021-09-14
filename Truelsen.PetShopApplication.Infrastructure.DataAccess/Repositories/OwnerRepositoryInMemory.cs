@@ -7,39 +7,50 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
     public class OwnerRepositoryInMemory : IOwnerRepository
     {
         
-        private static List<Owner> _ownerTable = new List<Owner>();
-        private static int _id = 1;
-        private static bool _hasInitializedData = false;
+        // private static List<Owner> _ownerTable = new List<Owner>();
+        // private static int _id = 1;
 
         public OwnerRepositoryInMemory()
         {
+            if (FakeDB.Owners.Count > 0) return;
             Owner owner1 = new Owner()
             {
-                Id = _id++,
+                Id = FakeDB.OwnerId++,
                 FirstName = "Peter",
-                LastName = "Hansen"
+                LastName = "Hansen",
+                
+                
             };
-            _ownerTable.Add(owner1);
+            FakeDB.Owners.Add(owner1);
+            Owner owner2 = new Owner()
+            {
+                Id = FakeDB.OwnerId++,
+                FirstName = "Jacob",
+                LastName = "Larsen",
+                
+                
+            };
+            FakeDB.Owners.Add(owner2);
         }
         
         #region CRUD
 
         public Owner Add(Owner owner)
         {
-            owner.Id = _id++;
-            _ownerTable.Add(owner);
+            owner.Id = FakeDB.OwnerId++;
+            FakeDB.Owners.Add(owner);
             return owner;
         }
 
         public List<Owner> GetAll()
         {
-            return _ownerTable;
+            return FakeDB.Owners;
         }
 
         public Owner Delete(int id)
         {
-            Owner foundOwner = _ownerTable.Find(owner => id == owner.Id);
-            _ownerTable.Remove(foundOwner);
+            Owner foundOwner = FakeDB.Owners.Find(owner => id == owner.Id);
+            FakeDB.Owners.Remove(foundOwner);
             return foundOwner;
         }
 

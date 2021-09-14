@@ -6,13 +6,13 @@ using Truelsen.PetShopApplication.Core.Models;
 namespace Truelsen.PetShopApplication.RestAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
-    public class PetShopController : ControllerBase
+    [Route("api/[controller]")]
+    public class PetsController : ControllerBase
     {
 
         private readonly IPetService _petService;
 
-        public PetShopController(IPetService petService)
+        public PetsController(IPetService petService)
         {
             _petService = petService;
         }
@@ -25,6 +25,7 @@ namespace Truelsen.PetShopApplication.RestAPI.Controllers
             return Ok(_petService.GetAll());
         }
         
+        
         // Find pet by type.
         [HttpGet("{type}")]
         public ActionResult<IEnumerable<Pet>> ReadByType(string type)
@@ -33,7 +34,7 @@ namespace Truelsen.PetShopApplication.RestAPI.Controllers
             {
                 return BadRequest("Name of the type is required to find by type.");
             }
-            return Ok(_petService.FindByType(type));
+            return Ok(_petService.FindPetByTypeIncludePreviousOwner(type));
         }
         
 
@@ -69,7 +70,7 @@ namespace Truelsen.PetShopApplication.RestAPI.Controllers
         {
             if (id == 0)
             {
-                return BadRequest("Correct id is needed to update a pet.");
+                return BadRequest("Correct id is needed to delete a pet.");
             }
 
             return Ok(_petService.Delete(id));

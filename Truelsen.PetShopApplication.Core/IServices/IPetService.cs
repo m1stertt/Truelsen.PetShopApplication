@@ -18,5 +18,7 @@ namespace Truelsen.PetShopApplication.Core.IServices
         List<Pet> SortByType(string type);
         List<Pet> SortByPrice();
         Pet FindById(int result);
+
+        List<Pet> FindPetByTypeIncludePreviousOwner(string type);
     }
 }

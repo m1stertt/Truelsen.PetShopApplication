@@ -9,15 +9,15 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
 {
     public class PetRepositoryMemory : IPetRepository
     {
-        private static List<Pet> _petTable = new List<Pet>();
-        private static int _id = 1;
+        // private static List<Pet> _petTable = new List<Pet>();
+        // private static int _id = 1;
         // private static bool _hasInitializedData = false;
 
         #region Constructor
 
         public PetRepositoryMemory()
         {
-            if (_id > 1) return;
+            if (FakeDB.PetId > 1) return;
             InitializeFakeData();
 
         }
@@ -28,26 +28,26 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
 
         public Pet Add(Pet pet)
         {
-            pet.Id = _id++;
-            _petTable.Add(pet);
+            pet.Id = FakeDB.PetId++;
+            FakeDB.Pets.Add(pet);
             return pet;
         }
 
         public List<Pet> GetAll()
         {
-            return _petTable;
+            return FakeDB.Pets;
         }
 
         public Pet Delete(int petId)
         {
-            Pet foundPet = _petTable.Find(pet => petId == pet.Id);
-            _petTable.Remove(foundPet);
+            Pet foundPet = FakeDB.Pets.Find(pet => petId == pet.Id);
+            FakeDB.Pets.Remove(foundPet);
             return foundPet;
         }
 
         public Pet Update(Pet pet)
         {
-            Pet foundPet = _petTable.Find(petId => petId.Id == pet.Id);
+            Pet foundPet = FakeDB.Pets.Find(petId => petId.Id == pet.Id);
             foundPet.Name = pet.Name;
             foundPet.Type = pet.Type;
             foundPet.Birthdate = pet.Birthdate;
@@ -62,9 +62,10 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
 
         private void InitializeFakeData()
         {
+            
             Pet pet1 = new Pet()
             {
-                Id = _id++,
+                Id = FakeDB.PetId++,
                 Name = "Luffi",
                 Birthdate = DateTime.Now,
                 Color = "Black",
@@ -73,13 +74,17 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
                 {
                     Name = "Goat"
                 },
-                SoldDate = DateTime.Now
-                
+                SoldDate = DateTime.Now,
+                PreviousOwner = new Owner()
+                {
+                    Id = 1
+                }
+
             };
-            _petTable.Add(pet1);
+            FakeDB.Pets.Add(pet1);
             Pet pet2 = new Pet()
             {
-                Id = _id++,
+                Id = FakeDB.PetId++,
                 Name = "Vuffi",
                 Birthdate = DateTime.Now,
                 Color = "White",
@@ -88,13 +93,17 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
                 {
                     Name = "Goat"
                 },
-                SoldDate = DateTime.Now
+                SoldDate = DateTime.Now,
+                PreviousOwner = new Owner()
+                {
+                Id = 1
+            }
                 
             };
-            _petTable.Add(pet2);
+            FakeDB.Pets.Add(pet2);
             Pet pet3 = new Pet()
             {
-                Id = _id++,
+                Id = FakeDB.PetId++,
                 Name = "Buffi",
                 Birthdate = DateTime.Now,
                 Color = "Gray",
@@ -103,13 +112,17 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
                 {
                     Name = "Dog"
                 },
-                SoldDate = DateTime.Now
+                SoldDate = DateTime.Now,
+                PreviousOwner = new Owner()
+                {
+                    Id = 2
+                }
                 
             };
-            _petTable.Add(pet3);
+            FakeDB.Pets.Add(pet3);
             Pet pet4 = new Pet()
             {
-                Id = _id++,
+                Id = FakeDB.PetId++,
                 Name = "Muffi",
                 Birthdate = DateTime.Now,
                 Color = "Black",
@@ -118,10 +131,14 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
                 {
                     Name = "Dog"
                 },
-                SoldDate = DateTime.Now
+                SoldDate = DateTime.Now,
+                PreviousOwner = new Owner()
+                {
+                    Id = 2
+                }
                 
             };
-            _petTable.Add(pet4);
+            FakeDB.Pets.Add(pet4);
         }
 
         #endregion

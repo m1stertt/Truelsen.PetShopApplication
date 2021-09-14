@@ -8,42 +8,80 @@ namespace Truelsen.PetShopApplication.Domain.Services
 {
     public class PetService : IPetService
     {
-        private readonly IPetRepository _repository;
+        private readonly IPetRepository _petRepository;
+        private readonly IOwnerRepository _ownerRepository;
 
-        public PetService(IPetRepository repository)
+
+        public PetService(IPetRepository petPetRepository, IOwnerRepository ownerRepository)
         {
-            _repository = repository;
+            _petRepository = petPetRepository;
+            _ownerRepository = ownerRepository;
+        }
+
+        public List<Pet> FindPetByTypeIncludePreviousOwner(string type)
+        {
+            var pets = FindByType(type);
+            var owners = _ownerRepository.GetAll();
+            foreach (var pet in pets)
+            {
+                foreach (var owner in owners)
+                {
+                    if (pet.PreviousOwner.Id == owner.Id)
+                    {
+                        pet.PreviousOwner = new Owner()
+                        {
+                            Id = owner.Id,
+                            Address = owner.Address,
+                            Email = owner.Email,
+                            FirstName = owner.FirstName,
+                            LastName = owner.LastName,
+                            PhoneNumber = owner.PhoneNumber
+                        };
+                    }
+                }
+            }
+            return pets;
         }
 
         public Pet Create(Pet pet)
         {
-            return _repository.Add(pet);
+            return _petRepository.Add(pet);
         }
 
         public List<Pet> GetAll()
         {
-            return _repository.GetAll();
+            return _petRepository.GetAll();
         }
 
         public Pet Update(Pet pet)
         {
-            return _repository.Update(pet);
+            return _petRepository.Update(pet);
         }
 
         public Pet Delete(int petId)
         {
-            return _repository.Delete(petId);
+            return _petRepository.Delete(petId);
         }
 
         public List<Pet> FindByType(string type)
         {
-            var allPets = _repository.GetAll();
+            var allPets = _petRepository.GetAll();
             List<Pet> results = new List<Pet>();
             foreach (var pet in allPets)
             {
                 if (pet.Type.Name.Equals(type))
                 {
-                    results.Add(pet);
+                    results.Add(new Pet()
+                    {
+                        Id = pet.Id,
+                        Name = pet.Name,
+                        Birthdate = pet.Birthdate,
+                        Color = pet.Color,
+                        Type = pet.Type,
+                        Price = pet.Price,
+                        SoldDate = pet.SoldDate,
+                        PreviousOwner = pet.PreviousOwner
+                    });
                 }
             }
 
@@ -52,7 +90,7 @@ namespace Truelsen.PetShopApplication.Domain.Services
 
         public List<Pet> SortByType(string type)
         {
-            var allPets = _repository.GetAll();
+            var allPets = _petRepository.GetAll();
             List<Pet> results = new List<Pet>();
             foreach (var pet in allPets)
             {
@@ -71,11 +109,10 @@ namespace Truelsen.PetShopApplication.Domain.Services
             return sortedList;
         }
 
-        
-        
+
         public Pet FindById(int id)
         {
-            var allPets = _repository.GetAll();
+            var allPets = _petRepository.GetAll();
             foreach (var pet in allPets)
             {
                 if (pet.Id == id)
