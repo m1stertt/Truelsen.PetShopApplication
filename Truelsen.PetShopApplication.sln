@@ -8,13 +8,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{3A02C657-4CE2-4870-8F47-0D9D5E39E28F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Truelsen.PetShopApplication.Infrastructure.DataAccess", "Truelsen.PetShopApplication.Infrastructure.DataAccess\Truelsen.PetShopApplication.Infrastructure.DataAccess.csproj", "{FB6808E1-529D-4682-AA7E-1389A55A5024}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Truelsen.PetShopApplication.Infrastructure.FakeDataAccess", "Truelsen.PetShopApplication.Infrastructure.FakeDataAccess\Truelsen.PetShopApplication.Infrastructure.FakeDataAccess.csproj", "{FB6808E1-529D-4682-AA7E-1389A55A5024}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Truelsen.PetShopApplication.Domain", "Truelsen.PetShopApplication.Domain\Truelsen.PetShopApplication.Domain.csproj", "{BF1FB67A-FAB8-409A-9579-E9B7A4D31FB7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Truelsen.PetShopApplication.Core", "Truelsen.PetShopApplication.Core\Truelsen.PetShopApplication.Core.csproj", "{8FA4416E-873A-4B0C-AD78-A6FE2BAD9E80}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Truelsen.PetShopApplication.PetRestAPI", "Truelsen.PetShopApplication.PetRestAPI\Truelsen.PetShopApplication.PetRestAPI.csproj", "{2ACCADF6-1DA3-4F58-9B73-A47FF250BCAC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Truelsen.PetShopApplication.Infrastructure.EFSql", "Truelsen.PetShopApplication.Infrastructure.EFSql\Truelsen.PetShopApplication.Infrastructure.EFSql.csproj", "{41942CFA-4534-44B2-8AA6-C062C2AF73D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +44,10 @@ Global
 		{2ACCADF6-1DA3-4F58-9B73-A47FF250BCAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2ACCADF6-1DA3-4F58-9B73-A47FF250BCAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2ACCADF6-1DA3-4F58-9B73-A47FF250BCAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41942CFA-4534-44B2-8AA6-C062C2AF73D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41942CFA-4534-44B2-8AA6-C062C2AF73D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41942CFA-4534-44B2-8AA6-C062C2AF73D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41942CFA-4534-44B2-8AA6-C062C2AF73D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{284CA319-B76C-42AD-B077-B0C4458940E6} = {3A02C657-4CE2-4870-8F47-0D9D5E39E28F}
@@ -49,5 +55,6 @@ Global
 		{BF1FB67A-FAB8-409A-9579-E9B7A4D31FB7} = {8AED764B-D07C-4E84-913A-8C4E4F06A5B0}
 		{8FA4416E-873A-4B0C-AD78-A6FE2BAD9E80} = {8AED764B-D07C-4E84-913A-8C4E4F06A5B0}
 		{2ACCADF6-1DA3-4F58-9B73-A47FF250BCAC} = {3A02C657-4CE2-4870-8F47-0D9D5E39E28F}
+		{41942CFA-4534-44B2-8AA6-C062C2AF73D3} = {3A02C657-4CE2-4870-8F47-0D9D5E39E28F}
 	EndGlobalSection
 EndGlobal

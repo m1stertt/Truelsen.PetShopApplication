@@ -6,7 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Truelsen.PetShopApplication.Infrastructure.DataAccess\Truelsen.PetShopApplication.Infrastructure.DataAccess.csproj" />
+      <ProjectReference Include="..\Truelsen.PetShopApplication.Infrastructure.FakeDataAccess\Truelsen.PetShopApplication.Infrastructure.FakeDataAccess.csproj" />
     </ItemGroup>
 
     <ItemGroup>
