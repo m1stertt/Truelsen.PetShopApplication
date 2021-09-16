@@ -2,14 +2,10 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>Truelsen.PetShopApplication.Infrastructure.DataAccess</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.10" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\Truelsen.PetShopApplication.Core\Truelsen.PetShopApplication.Core.csproj" />
       <ProjectReference Include="..\Truelsen.PetShopApplication.Domain\Truelsen.PetShopApplication.Domain.csproj" />
     </ItemGroup>
 
