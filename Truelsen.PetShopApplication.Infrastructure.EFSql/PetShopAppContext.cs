@@ -10,7 +10,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql
         }
 
         public DbSet<Pet> Pets { get; set; }
-        public DbSet<Owner> Owner { get; set; }
+        public DbSet<Owner> Owners { get; set; }
         
     }
 }

@@ -38,6 +38,11 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
             return FakeDB.Pets;
         }
 
+        public Pet GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public Pet Delete(int petId)
         {
             Pet foundPet = FakeDB.Pets.Find(pet => petId == pet.Id);
