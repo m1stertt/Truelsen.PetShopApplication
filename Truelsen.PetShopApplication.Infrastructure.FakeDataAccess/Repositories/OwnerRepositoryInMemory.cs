@@ -15,7 +15,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
             if (FakeDB.Owners.Count > 0) return;
             Owner owner1 = new Owner()
             {
-                Id = FakeDB.OwnerId++,
+                OwnerId = FakeDB.OwnerId++,
                 FirstName = "Peter",
                 LastName = "Hansen",
                 
@@ -24,7 +24,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
             FakeDB.Owners.Add(owner1);
             Owner owner2 = new Owner()
             {
-                Id = FakeDB.OwnerId++,
+                OwnerId = FakeDB.OwnerId++,
                 FirstName = "Jacob",
                 LastName = "Larsen",
                 
@@ -37,7 +37,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
 
         public Owner Add(Owner owner)
         {
-            owner.Id = FakeDB.OwnerId++;
+            owner.OwnerId = FakeDB.OwnerId++;
             FakeDB.Owners.Add(owner);
             return owner;
         }
@@ -49,7 +49,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
 
         public Owner Delete(int id)
         {
-            Owner foundOwner = FakeDB.Owners.Find(owner => id == owner.Id);
+            Owner foundOwner = FakeDB.Owners.Find(owner => id == owner.OwnerId);
             FakeDB.Owners.Remove(foundOwner);
             return foundOwner;
         }

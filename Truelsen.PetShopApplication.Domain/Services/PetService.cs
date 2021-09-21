@@ -26,11 +26,11 @@ namespace Truelsen.PetShopApplication.Domain.Services
             {
                 foreach (var owner in owners)
                 {
-                    if (pet.PreviousOwner.Id == owner.Id)
+                    if (pet.PreviousOwner.OwnerId == owner.OwnerId)
                     {
                         pet.PreviousOwner = new Owner()
                         {
-                            Id = owner.Id,
+                            OwnerId = owner.OwnerId,
                             Address = owner.Address,
                             Email = owner.Email,
                             FirstName = owner.FirstName,
@@ -73,7 +73,7 @@ namespace Truelsen.PetShopApplication.Domain.Services
                 {
                     results.Add(new Pet()
                     {
-                        Id = pet.Id,
+                        PetId = pet.PetId,
                         Name = pet.Name,
                         Birthdate = pet.Birthdate,
                         Color = pet.Color,
@@ -115,7 +115,7 @@ namespace Truelsen.PetShopApplication.Domain.Services
             var allPets = _petRepository.GetAll();
             foreach (var pet in allPets)
             {
-                if (pet.Id == id)
+                if (pet.PetId == id)
                 {
                     return pet;
                 }

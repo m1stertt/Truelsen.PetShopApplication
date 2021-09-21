@@ -17,7 +17,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql.Repositories
 
         public Pet Add(Pet pet)
         {
-            var savedPet = new Pet()
+            var entity = new Pet()
             {
                 Name = pet.Name,
                 Birthdate = pet.Birthdate,
@@ -27,16 +27,18 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql.Repositories
                 PreviousOwner = pet.PreviousOwner,
                 SoldDate = pet.SoldDate
             };
+            var savedEntity = _ctx.Add(entity).Entity;
+            _ctx.SaveChanges();
             return new Pet()
             {
-                Id = savedPet.Id,
-                Name = savedPet.Name,
-                Birthdate = savedPet.Birthdate,
-                Color = savedPet.Color,
-                Price = savedPet.Price,
-                Type = savedPet.Type,
-                PreviousOwner = savedPet.PreviousOwner,
-                SoldDate = savedPet.SoldDate
+                PetId = savedEntity.PetId,
+                Name = savedEntity.Name,
+                Birthdate = savedEntity.Birthdate,
+                Color = savedEntity.Color,
+                Price = savedEntity.Price,
+                Type = savedEntity.Type,
+                PreviousOwner = savedEntity.PreviousOwner,
+                SoldDate = savedEntity.SoldDate
             };
         }
 
@@ -44,7 +46,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql.Repositories
         {
             return _ctx.Pets.Select(pet => new Pet()
             {
-                Id = pet.Id,
+                PetId = pet.PetId,
                 Name = pet.Name,
                 Birthdate = pet.Birthdate,
                 Color = pet.Color,
@@ -60,7 +62,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql.Repositories
             return _ctx.Pets
                 .Select(pet => new Pet()
                 {
-                    Id = pet.Id,
+                    PetId = pet.PetId,
                     Name = pet.Name,
                     Birthdate = pet.Birthdate,
                     Color = pet.Color,
@@ -69,16 +71,16 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql.Repositories
                     PreviousOwner = pet.PreviousOwner,
                     SoldDate = pet.SoldDate
                 })
-                .FirstOrDefault(p => p.Id == id);
+                .FirstOrDefault(p => p.PetId == id);
         }
 
         public Pet Delete(int petId)
         {
-            var savedEntity = _ctx.Pets.Remove(new Pet() { Id = petId }).Entity;
+            var savedEntity = _ctx.Pets.Remove(new Pet() { PetId = petId }).Entity;
             _ctx.SaveChanges();
             return new Pet()
             {
-                Id = savedEntity.Id,
+                PetId = savedEntity.PetId,
                 Name = savedEntity.Name,
                 Birthdate = savedEntity.Birthdate,
                 Color = savedEntity.Color,
@@ -94,7 +96,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql.Repositories
         {
             var entity = new Pet()
             {
-                Id = pet.Id,
+                PetId = pet.PetId,
                 Name = pet.Name,
                 Birthdate = pet.Birthdate,
                 Color = pet.Color,
@@ -107,7 +109,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql.Repositories
             _ctx.SaveChanges();
             return new Pet()
             {
-                Id = savedEntity.Id,
+                PetId = savedEntity.PetId,
                 Name = savedEntity.Name,
                 Birthdate = savedEntity.Birthdate,
                 Color = savedEntity.Color,

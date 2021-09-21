@@ -37,6 +37,17 @@ namespace Truelsen.PetShopApplication.RestAPI.Controllers
             return Ok(_petService.FindPetByTypeIncludePreviousOwner(type));
         }
         
+        // Find pet by id.
+        [HttpGet("{id:int}")]
+        public ActionResult<IEnumerable<Pet>> ReadByType(int id)
+        {
+            if (id == 0)
+            {
+                return BadRequest("An ID is required to find by id.");
+            }
+            return Ok(_petService.FindById(id));
+        }
+        
 
         
         // Post new Pet.
@@ -55,7 +66,7 @@ namespace Truelsen.PetShopApplication.RestAPI.Controllers
         [HttpPut("{id}")]  
         public ActionResult<Pet> Update(int id, Pet pet)
         {
-            if (id < 1 || id != pet.Id)
+            if (id < 1 || id != pet.PetId)
             {
                 return BadRequest("Correct id is needed to update a pet.");
             }

@@ -2,7 +2,7 @@ namespace Truelsen.PetShopApplication.Core.Models
 {
     public class Owner
     {
-        public int? Id { get; set; }
+        public int? OwnerId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Address { get; set; }

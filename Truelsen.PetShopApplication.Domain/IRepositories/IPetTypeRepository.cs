@@ -9,6 +9,7 @@ namespace Truelsen.PetShopApplication.Domain.IRepositories
 
         List<PetType> GetAll();
         PetType Update(PetType petType);
-        PetType Delete(PetType petType);
+        PetType Delete(int id);
+        PetType GetById(int id);
     }
 }

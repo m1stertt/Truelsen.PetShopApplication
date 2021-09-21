@@ -40,7 +40,7 @@ namespace Truelsen.PetShopApplication.Domain.Services
             var allOwners = _repository.GetAll();
             foreach (var owner in allOwners)
             {
-                if (owner.Id == id)
+                if (owner.OwnerId == id)
                 {
                     return owner;
                 }

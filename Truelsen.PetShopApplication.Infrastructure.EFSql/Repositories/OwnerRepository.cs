@@ -17,7 +17,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql.Repositories
 
         public Owner Add(Owner owner)
         {
-            var savedEntity = new Owner()
+            var entity = new Owner()
             {
                 FirstName = owner.FirstName,
                 LastName = owner.LastName,
@@ -25,9 +25,11 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql.Repositories
                 Email = owner.Email,
                 PhoneNumber = owner.PhoneNumber
             };
+            var savedEntity = _ctx.Add(entity).Entity;
+            _ctx.SaveChanges();
             return new Owner()
             {
-                Id = savedEntity.Id,
+                OwnerId = savedEntity.OwnerId,
                 FirstName = savedEntity.FirstName,
                 LastName = savedEntity.LastName,
                 Address = savedEntity.Address,
@@ -40,7 +42,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql.Repositories
         {
             return _ctx.Owners.Select(owner => new Owner()
             {
-                Id = owner.Id,
+                OwnerId = owner.OwnerId,
                 FirstName = owner.FirstName,
                 LastName = owner.LastName,
                 Address = owner.Address,
@@ -51,11 +53,11 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql.Repositories
 
         public Owner Delete(int ownerId)
         {
-            var savedEntity = _ctx.Owners.Remove(new Owner() { Id = ownerId }).Entity;
+            var savedEntity = _ctx.Owners.Remove(new Owner() { OwnerId = ownerId }).Entity;
             _ctx.SaveChanges();
             return new Owner()
             {
-                Id = savedEntity.Id,
+                OwnerId = savedEntity.OwnerId,
                 FirstName = savedEntity.FirstName,
                 LastName = savedEntity.LastName,
                 Address = savedEntity.Address,
@@ -68,7 +70,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql.Repositories
         {
             var entity = new Owner()
             {
-                Id = owner.Id,
+                OwnerId = owner.OwnerId,
                 FirstName = owner.FirstName,
                 LastName = owner.LastName,
                 Address = owner.Address,
@@ -79,7 +81,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql.Repositories
             _ctx.SaveChanges();
             return new Owner()
             {
-                Id = savedEntity.Id,
+                OwnerId = savedEntity.OwnerId,
                 FirstName = savedEntity.FirstName,
                 LastName = savedEntity.LastName,
                 Address = savedEntity.Address,

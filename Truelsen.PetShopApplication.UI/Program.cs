@@ -16,6 +16,8 @@ namespace Truelsen.PetShopApplication.UI
             serviceCollection.AddScoped<IPetService, PetService>();
             serviceCollection.AddScoped<IPetTypeRepository, PetTypeRepositoryInMemory>();
             serviceCollection.AddScoped<IPetTypeService, PetTypeService>();
+            serviceCollection.AddScoped<IOwnerRepository, OwnerRepositoryInMemory>();
+            serviceCollection.AddScoped<IOwnerService, OwnerService>();
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
             var petService = serviceProvider.GetRequiredService<IPetService>();

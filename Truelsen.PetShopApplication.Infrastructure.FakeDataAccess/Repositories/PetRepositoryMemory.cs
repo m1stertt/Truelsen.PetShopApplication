@@ -28,7 +28,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
 
         public Pet Add(Pet pet)
         {
-            pet.Id = FakeDB.PetId++;
+            pet.PetId = FakeDB.PetId++;
             FakeDB.Pets.Add(pet);
             return pet;
         }
@@ -45,14 +45,14 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
 
         public Pet Delete(int petId)
         {
-            Pet foundPet = FakeDB.Pets.Find(pet => petId == pet.Id);
+            Pet foundPet = FakeDB.Pets.Find(pet => petId == pet.PetId);
             FakeDB.Pets.Remove(foundPet);
             return foundPet;
         }
 
         public Pet Update(Pet pet)
         {
-            Pet foundPet = FakeDB.Pets.Find(petId => petId.Id == pet.Id);
+            Pet foundPet = FakeDB.Pets.Find(petId => petId.PetId == pet.PetId);
             foundPet.Name = pet.Name;
             foundPet.Type = pet.Type;
             foundPet.Birthdate = pet.Birthdate;
@@ -70,7 +70,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
             
             Pet pet1 = new Pet()
             {
-                Id = FakeDB.PetId++,
+                PetId = FakeDB.PetId++,
                 Name = "Luffi",
                 Birthdate = DateTime.Now,
                 Color = "Black",
@@ -82,14 +82,14 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
                 SoldDate = DateTime.Now,
                 PreviousOwner = new Owner()
                 {
-                    Id = 1
+                    OwnerId = 1
                 }
 
             };
             FakeDB.Pets.Add(pet1);
             Pet pet2 = new Pet()
             {
-                Id = FakeDB.PetId++,
+                PetId = FakeDB.PetId++,
                 Name = "Vuffi",
                 Birthdate = DateTime.Now,
                 Color = "White",
@@ -101,14 +101,14 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
                 SoldDate = DateTime.Now,
                 PreviousOwner = new Owner()
                 {
-                Id = 1
+                OwnerId = 1
             }
                 
             };
             FakeDB.Pets.Add(pet2);
             Pet pet3 = new Pet()
             {
-                Id = FakeDB.PetId++,
+                PetId = FakeDB.PetId++,
                 Name = "Buffi",
                 Birthdate = DateTime.Now,
                 Color = "Gray",
@@ -120,14 +120,14 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
                 SoldDate = DateTime.Now,
                 PreviousOwner = new Owner()
                 {
-                    Id = 2
+                    OwnerId = 2
                 }
                 
             };
             FakeDB.Pets.Add(pet3);
             Pet pet4 = new Pet()
             {
-                Id = FakeDB.PetId++,
+                PetId = FakeDB.PetId++,
                 Name = "Muffi",
                 Birthdate = DateTime.Now,
                 Color = "Black",
@@ -139,7 +139,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
                 SoldDate = DateTime.Now,
                 PreviousOwner = new Owner()
                 {
-                    Id = 2
+                    OwnerId = 2
                 }
                 
             };

@@ -103,7 +103,7 @@ namespace Truelsen.PetShopApplication.UI
             foreach (var pet in results)
             {
                 Console.WriteLine(
-                    $"{pet.Id}{pet.Name}, {pet.Birthdate.ToString()}, {pet.Color}, {pet.Price}, {pet.Type.Name}, {pet.SoldDate.ToString()}");
+                    $"{pet.PetId}{pet.Name}, {pet.Birthdate.ToString()}, {pet.Color}, {pet.Price}, {pet.Type.Name}, {pet.SoldDate.ToString()}");
             }
         }
 
@@ -219,7 +219,7 @@ namespace Truelsen.PetShopApplication.UI
             {
                 Name = type
             };
-            petType = _petTypeService.Find(petType) ?? _petTypeService.Create(petType);
+            petType = _petTypeService.FindById(petType.PetTypeId.GetValueOrDefault()) ?? _petTypeService.Create(petType);
 
             var pet = new Pet()
             {
@@ -324,7 +324,7 @@ namespace Truelsen.PetShopApplication.UI
         public void PrintPetDetails(Pet pet)
         {
             Console.WriteLine(
-                $"Id: {pet.Id}, Name: {pet.Name}, Birthdate: {pet.Birthdate.ToString()}, Color: {pet.Color}," +
+                $"Id: {pet.PetId}, Name: {pet.Name}, Birthdate: {pet.Birthdate.ToString()}, Color: {pet.Color}," +
                 $" Price: {pet.Price}, Pet Type: {pet.Type.Name}, Sold Date: {pet.SoldDate.ToString()}");
         }
 

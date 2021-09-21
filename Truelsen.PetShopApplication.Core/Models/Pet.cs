@@ -4,7 +4,7 @@ namespace Truelsen.PetShopApplication.Core.Models
 {
     public class Pet
     {
-        public int? Id { get; set; }
+        public int? PetId { get; set; }
         public string Name { get; set; }
         public PetType Type { get; set; }
         public DateTime Birthdate { get; set; }

@@ -29,17 +29,17 @@ namespace Truelsen.PetShopApplication.Domain.Services
             return _repository.Update(petType);
         }
 
-        public PetType Delete(PetType petType)
+        public PetType Delete(int id)
         {
-            return _repository.Delete(petType);
+            return _repository.Delete(id);
         }
 
-        public PetType Find(PetType type)
+        public PetType FindById(int id)
         {
             var allPetTypes = _repository.GetAll();
             foreach (var petType in allPetTypes)
             {
-                if (petType.Name.Equals(type.Name))
+                if (petType.PetTypeId == id)
                 {
                     return petType;
                 }

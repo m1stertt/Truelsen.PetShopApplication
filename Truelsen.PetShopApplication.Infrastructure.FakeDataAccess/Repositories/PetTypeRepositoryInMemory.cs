@@ -13,7 +13,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
         {
             PetType petType = new PetType()
             {
-                Id = _id++,
+
                 Name = "Goat",
             };
             _petTypeTable.Add(petType);
@@ -21,7 +21,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
 
         public PetType Add(PetType petType)
         {
-            petType.Id = _id++;
+            petType.PetTypeId = _id++;
             _petTypeTable.Add(petType);
             return petType;
         }
@@ -33,16 +33,20 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
 
         public PetType Update(PetType petType)
         {
-            PetType foundPetType =_petTypeTable.Find(petTypeId => petTypeId.Id == petType.Id);
+            PetType foundPetType =_petTypeTable.Find(petTypeId => petTypeId.PetTypeId == petType.PetTypeId);
             _petTypeTable.Remove(foundPetType);
             return foundPetType;
         }
 
-        public PetType Delete(PetType petType)
+        public PetType Delete(int id)
         {
-            PetType foundPetType =_petTypeTable.Find(petTypeId => petTypeId.Id == petType.Id);
-            foundPetType = petType;
+            PetType foundPetType =_petTypeTable.Find(petTypeId => petTypeId.PetTypeId == id);
             return foundPetType;
+        }
+
+        public PetType GetById(int id)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
