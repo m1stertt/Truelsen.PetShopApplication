@@ -59,7 +59,12 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
             foundPet.Color = pet.Color;
             foundPet.Price = pet.Price;
             return foundPet;
-        } 
+        }
+
+        public List<Pet> GetByType(string type)
+        {
+            throw new NotImplementedException();
+        }
 
         #endregion
 

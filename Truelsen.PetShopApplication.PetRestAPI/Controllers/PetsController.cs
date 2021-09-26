@@ -34,7 +34,7 @@ namespace Truelsen.PetShopApplication.RestAPI.Controllers
             {
                 return BadRequest("Name of the type is required to find by type.");
             }
-            return Ok(_petService.FindPetByTypeIncludePreviousOwner(type));
+            return Ok(_petService.FindByType(type));
         }
         
         // Find pet by id.
@@ -52,7 +52,7 @@ namespace Truelsen.PetShopApplication.RestAPI.Controllers
         
         // Post new Pet.
         [HttpPost]  
-        public ActionResult<Pet> Post(Pet pet)
+        public ActionResult<Pet> Post([FromBody] Pet pet)
         {
             if (pet == null)
             {
@@ -64,7 +64,7 @@ namespace Truelsen.PetShopApplication.RestAPI.Controllers
         
         // Put pet
         [HttpPut("{id}")]  
-        public ActionResult<Pet> Update(int id, Pet pet)
+        public ActionResult<Pet> Update(int id, [FromBody] Pet pet)
         {
             if (id < 1 || id != pet.PetId)
             {

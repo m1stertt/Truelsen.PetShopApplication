@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using Truelsen.PetShopApplication.Core.Models;
 using Truelsen.PetShopApplication.Domain.IRepositories;
 
@@ -13,7 +14,6 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql.Repositories
         {
             _ctx = ctx;
         }
-
 
         public Pet Add(Pet pet)
         {
@@ -57,6 +57,12 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql.Repositories
             }).ToList();
         }
 
+        public List<Pet> GetByType(string type)
+        {
+            return _ctx.Pets.Where(pet => pet.Type.Name.Equals(type)).Include(pet => pet.Type)
+                .Include(pet => pet.PreviousOwner).ToList();
+        }
+
         public Pet GetById(int id)
         {
             return _ctx.Pets
@@ -74,24 +80,6 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql.Repositories
                 .FirstOrDefault(p => p.PetId == id);
         }
 
-        public Pet Delete(int petId)
-        {
-            var savedEntity = _ctx.Pets.Remove(new Pet() { PetId = petId }).Entity;
-            _ctx.SaveChanges();
-            return new Pet()
-            {
-                PetId = savedEntity.PetId,
-                Name = savedEntity.Name,
-                Birthdate = savedEntity.Birthdate,
-                Color = savedEntity.Color,
-                Price = savedEntity.Price,
-                Type = savedEntity.Type,
-                PreviousOwner = savedEntity.PreviousOwner,
-                SoldDate = savedEntity.SoldDate
-            };
-        }
-        
-
         public Pet Update(Pet pet)
         {
             var entity = new Pet()
@@ -106,6 +94,23 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql.Repositories
                 SoldDate = pet.SoldDate
             };
             var savedEntity = _ctx.Pets.Update(entity).Entity;
+            _ctx.SaveChanges();
+            return new Pet()
+            {
+                PetId = savedEntity.PetId,
+                Name = savedEntity.Name,
+                Birthdate = savedEntity.Birthdate,
+                Color = savedEntity.Color,
+                Price = savedEntity.Price,
+                Type = savedEntity.Type,
+                PreviousOwner = savedEntity.PreviousOwner,
+                SoldDate = savedEntity.SoldDate
+            };
+        }
+
+        public Pet Delete(int petId)
+        {
+            var savedEntity = _ctx.Pets.Remove(new Pet() {PetId = petId}).Entity;
             _ctx.SaveChanges();
             return new Pet()
             {

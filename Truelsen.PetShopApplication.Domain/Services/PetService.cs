@@ -65,63 +65,25 @@ namespace Truelsen.PetShopApplication.Domain.Services
 
         public List<Pet> FindByType(string type)
         {
-            var allPets = _petRepository.GetAll();
-            List<Pet> results = new List<Pet>();
-            foreach (var pet in allPets)
-            {
-                if (pet.Type.Name.Equals(type))
-                {
-                    results.Add(new Pet()
-                    {
-                        PetId = pet.PetId,
-                        Name = pet.Name,
-                        Birthdate = pet.Birthdate,
-                        Color = pet.Color,
-                        Type = pet.Type,
-                        Price = pet.Price,
-                        SoldDate = pet.SoldDate,
-                        PreviousOwner = pet.PreviousOwner
-                    });
-                }
-            }
-
-            return results;
+            return _petRepository.GetByType(type);
         }
 
         public List<Pet> SortByType(string type)
         {
-            var allPets = _petRepository.GetAll();
-            List<Pet> results = new List<Pet>();
-            foreach (var pet in allPets)
-            {
-                if (pet.Type.Name.Equals(type))
-                {
-                    results.Add(pet);
-                }
-            }
-
-            return results;
+            throw new System.NotImplementedException();
         }
+
 
         public List<Pet> SortByPrice()
         {
-            List<Pet> sortedList = GetAll().OrderBy(pet => pet.Price).ToList();
-            return sortedList;
+            return GetAll().OrderBy(pet => pet.Price).ToList();
+
         }
 
 
         public Pet FindById(int id)
         {
-            var allPets = _petRepository.GetAll();
-            foreach (var pet in allPets)
-            {
-                if (pet.PetId == id)
-                {
-                    return pet;
-                }
-            }
-
-            return null;
+            return _petRepository.GetById(id);
         }
     }
 }
