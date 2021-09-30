@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Truelsen.PetShopApplication.Core.Models;
 using Truelsen.PetShopApplication.Domain.IRepositories;
+using Truelsen.PetShopApplication.Infrastructure.EFSql.Entities;
 
 namespace Truelsen.PetShopApplication.Infrastructure.EFSql.Repositories
 {
@@ -53,7 +54,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql.Repositories
 
         public Owner Delete(int ownerId)
         {
-            var savedEntity = _ctx.Owners.Remove(new Owner() { OwnerId = ownerId }).Entity;
+            var savedEntity = _ctx.Owners.Remove(new OwnerEntity() { OwnerId = ownerId }).Entity;
             _ctx.SaveChanges();
             return new Owner()
             {
@@ -68,9 +69,9 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql.Repositories
 
         public Owner Update(Owner owner)
         {
-            var entity = new Owner()
+            var entity = new OwnerEntity()
             {
-                OwnerId = owner.OwnerId,
+                OwnerId = (int) owner.OwnerId,
                 FirstName = owner.FirstName,
                 LastName = owner.LastName,
                 Address = owner.Address,

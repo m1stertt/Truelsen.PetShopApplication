@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Truelsen.PetShopApplication.Core.Models;
 using Truelsen.PetShopApplication.Domain.IRepositories;
+using Truelsen.PetShopApplication.Infrastructure.EFSql.Entities;
 
 namespace Truelsen.PetShopApplication.Infrastructure.EFSql.Repositories
 {
@@ -21,7 +22,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql.Repositories
             {
                 Name = pet.Name,
                 Birthdate = pet.Birthdate,
-                Color = pet.Color,
+                Colors = pet.Colors,
                 Price = pet.Price,
                 Type = pet.Type,
                 PreviousOwner = pet.PreviousOwner,
@@ -34,7 +35,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql.Repositories
                 PetId = savedEntity.PetId,
                 Name = savedEntity.Name,
                 Birthdate = savedEntity.Birthdate,
-                Color = savedEntity.Color,
+                Colors = savedEntity.Colors,
                 Price = savedEntity.Price,
                 Type = savedEntity.Type,
                 PreviousOwner = savedEntity.PreviousOwner,
@@ -49,10 +50,10 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql.Repositories
                 PetId = pet.PetId,
                 Name = pet.Name,
                 Birthdate = pet.Birthdate,
-                Color = pet.Color,
+                Colors = new List<PetColor>(_ctx.PetColors.Select(entity => new PetColor()).Where(pce => pce.PetColorId == pet.PetId )),
                 Price = pet.Price,
-                Type = pet.Type,
-                PreviousOwner = pet.PreviousOwner,
+                // Type = new List<PetType>(_ctx.PetTypes.Select(entity => new PetType()).Where(pte => pte.pet == pet.PetId))
+                // PreviousOwner = pet.PreviousOwner,
                 SoldDate = pet.SoldDate
             }).ToList();
         }
@@ -71,7 +72,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql.Repositories
                     PetId = pet.PetId,
                     Name = pet.Name,
                     Birthdate = pet.Birthdate,
-                    Color = pet.Color,
+                    Colors = pet.Colors,
                     Price = pet.Price,
                     Type = pet.Type,
                     PreviousOwner = pet.PreviousOwner,
@@ -87,7 +88,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql.Repositories
                 PetId = pet.PetId,
                 Name = pet.Name,
                 Birthdate = pet.Birthdate,
-                Color = pet.Color,
+                Colors = pet.Colors,
                 Price = pet.Price,
                 Type = pet.Type,
                 PreviousOwner = pet.PreviousOwner,
@@ -100,7 +101,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql.Repositories
                 PetId = savedEntity.PetId,
                 Name = savedEntity.Name,
                 Birthdate = savedEntity.Birthdate,
-                Color = savedEntity.Color,
+                Colors = savedEntity.Colors,
                 Price = savedEntity.Price,
                 Type = savedEntity.Type,
                 PreviousOwner = savedEntity.PreviousOwner,
@@ -117,7 +118,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql.Repositories
                 PetId = savedEntity.PetId,
                 Name = savedEntity.Name,
                 Birthdate = savedEntity.Birthdate,
-                Color = savedEntity.Color,
+                Colors = savedEntity.Colors,
                 Price = savedEntity.Price,
                 Type = savedEntity.Type,
                 PreviousOwner = savedEntity.PreviousOwner,

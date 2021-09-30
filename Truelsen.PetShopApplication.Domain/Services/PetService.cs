@@ -20,27 +20,29 @@ namespace Truelsen.PetShopApplication.Domain.Services
 
         public List<Pet> FindPetByTypeIncludePreviousOwner(string type)
         {
-            var pets = FindByType(type);
-            var owners = _ownerRepository.GetAll();
-            foreach (var pet in pets)
-            {
-                foreach (var owner in owners)
-                {
-                    if (pet.PreviousOwner.OwnerId == owner.OwnerId)
-                    {
-                        pet.PreviousOwner = new Owner()
-                        {
-                            OwnerId = owner.OwnerId,
-                            Address = owner.Address,
-                            Email = owner.Email,
-                            FirstName = owner.FirstName,
-                            LastName = owner.LastName,
-                            PhoneNumber = owner.PhoneNumber
-                        };
-                    }
-                }
-            }
-            return pets;
+            // var pets = FindByType(type);
+            // var owners = _ownerRepository.GetAll();
+            // foreach (var pet in pets)
+            // {
+            //     foreach (var owner in owners)
+            //     {
+            //         if (pet.PreviousOwner.OwnerId == owner.OwnerId)
+            //         {
+            //             pet.PreviousOwner = new Owner()
+            //             {
+            //                 OwnerId = owner.OwnerId,
+            //                 Address = owner.Address,
+            //                 Email = owner.Email,
+            //                 FirstName = owner.FirstName,
+            //                 LastName = owner.LastName,
+            //                 PhoneNumber = owner.PhoneNumber
+            //             };
+            //         }
+            //     }
+            // }
+            // return pets;
+
+            return GetAll().FindAll(pet => Equals(pet.Type.Name, type));
         }
 
         public Pet Create(Pet pet)

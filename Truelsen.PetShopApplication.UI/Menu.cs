@@ -103,7 +103,7 @@ namespace Truelsen.PetShopApplication.UI
             foreach (var pet in results)
             {
                 Console.WriteLine(
-                    $"{pet.PetId}{pet.Name}, {pet.Birthdate.ToString()}, {pet.Color}, {pet.Price}, {pet.Type.Name}, {pet.SoldDate.ToString()}");
+                    $"{pet.PetId}{pet.Name}, {pet.Birthdate.ToString()}, {pet.Colors}, {pet.Price}, {pet.Type.Name}, {pet.SoldDate.ToString()}");
             }
         }
 
@@ -134,7 +134,7 @@ namespace Truelsen.PetShopApplication.UI
                 pet.Type = updatedPet.Type;
                 pet.Price = updatedPet.Price;
                 pet.Birthdate = updatedPet.Birthdate;
-                pet.Color = updatedPet.Color;
+                pet.Colors = updatedPet.Colors;
                 pet.SoldDate = updatedPet.SoldDate;
                 _petService.Update(pet);
             }
@@ -225,7 +225,7 @@ namespace Truelsen.PetShopApplication.UI
             {
                 Name = petName,
                 Birthdate = Convert.ToDateTime(birthdate),
-                Color = color,
+                Colors = color,
                 Price = Convert.ToDouble(price),
                 Type = petType,
                 SoldDate = DateTime.Now
@@ -324,7 +324,7 @@ namespace Truelsen.PetShopApplication.UI
         public void PrintPetDetails(Pet pet)
         {
             Console.WriteLine(
-                $"Id: {pet.PetId}, Name: {pet.Name}, Birthdate: {pet.Birthdate.ToString()}, Color: {pet.Color}," +
+                $"Id: {pet.PetId}, Name: {pet.Name}, Birthdate: {pet.Birthdate.ToString()}, Color: {pet.Colors}," +
                 $" Price: {pet.Price}, Pet Type: {pet.Type.Name}, Sold Date: {pet.SoldDate.ToString()}");
         }
 

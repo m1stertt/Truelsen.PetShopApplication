@@ -36,7 +36,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql
             {
                 Name = "Luffi",
                 Birthdate = DateTime.Now,
-                Color = "Black",
+                Colors = "Black",
                 Price = 5000,
                 Type = petType1,
                 SoldDate = DateTime.Now,
@@ -48,7 +48,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql
             {
                 Name = "Vuffi",
                 Birthdate = DateTime.Now,
-                Color = "White",
+                Colors = "White",
                 Price = 150000,
                 Type = petType1,
                 SoldDate = DateTime.Now,
@@ -60,7 +60,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql
             {
                 Name = "Buffi",
                 Birthdate = DateTime.Now,
-                Color = "Gray",
+                Colors = "Gray",
                 Price = 25000,
                 Type = petType2,
                 SoldDate = DateTime.Now,
@@ -72,7 +72,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql
             {
                 Name = "Muffi",
                 Birthdate = DateTime.Now,
-                Color = "Black",
+                Colors = "Black",
                 Price = 100000,
                 Type = petType2,
                 SoldDate = DateTime.Now,

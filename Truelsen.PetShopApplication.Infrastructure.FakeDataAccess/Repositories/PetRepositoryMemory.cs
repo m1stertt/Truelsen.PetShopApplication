@@ -56,7 +56,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
             foundPet.Name = pet.Name;
             foundPet.Type = pet.Type;
             foundPet.Birthdate = pet.Birthdate;
-            foundPet.Color = pet.Color;
+            foundPet.Colors = pet.Colors;
             foundPet.Price = pet.Price;
             return foundPet;
         }
@@ -78,7 +78,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
                 PetId = FakeDB.PetId++,
                 Name = "Luffi",
                 Birthdate = DateTime.Now,
-                Color = "Black",
+                Colors = "Black",
                 Price = 5000,
                 Type = new PetType()
                 {
@@ -97,7 +97,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
                 PetId = FakeDB.PetId++,
                 Name = "Vuffi",
                 Birthdate = DateTime.Now,
-                Color = "White",
+                Colors = "White",
                 Price = 150000,
                 Type = new PetType()
                 {
@@ -116,7 +116,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
                 PetId = FakeDB.PetId++,
                 Name = "Buffi",
                 Birthdate = DateTime.Now,
-                Color = "Gray",
+                Colors = "Gray",
                 Price = 25000,
                 Type = new PetType()
                 {
@@ -135,7 +135,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
                 PetId = FakeDB.PetId++,
                 Name = "Muffi",
                 Birthdate = DateTime.Now,
-                Color = "Black",
+                Colors = "Black",
                 Price = 100000,
                 Type = new PetType()
                 {
