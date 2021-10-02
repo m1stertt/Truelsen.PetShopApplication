@@ -14,7 +14,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
             PetType petType = new PetType()
             {
 
-                Name = "Goat",
+                PetTypeName = "Goat",
             };
             _petTypeTable.Add(petType);
         }

@@ -42,7 +42,7 @@ namespace Truelsen.PetShopApplication.Domain.Services
             // }
             // return pets;
 
-            return GetAll().FindAll(pet => Equals(pet.Type.Name, type));
+            return GetAll().FindAll(pet => Equals(pet.Type.PetTypeName, type));
         }
 
         public Pet Create(Pet pet)

@@ -1,7 +1,6 @@
 using System.Drawing;
 using Microsoft.EntityFrameworkCore;
 using Truelsen.PetShopApplication.Core.Models;
-using Truelsen.PetShopApplication.Infrastructure.EFSql.Entities;
 
 namespace Truelsen.PetShopApplication.Infrastructure.EFSql
 {
@@ -16,22 +15,22 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql
             
             // modelBuilder.Entity<Pet>().HasKey(p => new { p.PreviousOwner.OwnerId, p.})
                 
-            modelBuilder.Entity<Pet>().HasOne(p => p.Type).WithMany(pt => pt.Pets).OnDelete(DeleteBehavior.SetNull);
-
-            modelBuilder.Entity<Pet>().HasMany(p => p.PreviousOwner).WithMany(pc => pc.Pets);
-
-            modelBuilder.Entity<Pet>().HasMany(p => p.PreviousOwner).WithMany(po => po.Pets);
+            modelBuilder.Entity<Pet>().HasOne(p => p.Type).WithMany(pt => pt.PetTypePets).OnDelete(DeleteBehavior.SetNull);
+            
+            modelBuilder.Entity<Pet>().HasMany(p => p.Colors).WithMany(pc => pc.PetColorPets);
+            
+            modelBuilder.Entity<Pet>().HasOne(p => p.PreviousOwner).WithMany(po => po.OwnerPets).OnDelete(DeleteBehavior.SetNull);
             
             
         }
 
-        public DbSet<PetEntity> Pets { get; set; }
-        public DbSet<OwnerEntity> Owners { get; set; }
-        public DbSet<PetTypeEntity> PetTypes { get; set; }
+        public DbSet<Pet> Pets { get; set; }
+        public DbSet<Owner> Owners { get; set; }
+        public DbSet<PetType> PetTypes { get; set; }
         
-        public DbSet<PetPreviousOwnerEntity> PetPreviousOwners { get; set; }
+        public DbSet<PetColor> PetColors { get; set; }
         
-        public DbSet<PetPetColorEntity> PetColors { get; set; }
+
         
         
 

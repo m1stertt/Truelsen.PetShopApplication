@@ -6,8 +6,8 @@ namespace Truelsen.PetShopApplication.Core.Models
     {
         public int? PetTypeId { get; set; }
         
-        public string Name { get; set; }
+        public string PetTypeName { get; set; }
 
-        public List<Pet> Pets { get; set; }
+        public List<Pet> PetTypePets { get; set; }
     }
 }

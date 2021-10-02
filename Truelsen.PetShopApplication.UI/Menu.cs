@@ -99,11 +99,11 @@ namespace Truelsen.PetShopApplication.UI
         private void SortPetsByType()
         {
             var results = GetTypeSearch();
-            Console.WriteLine($"All {results.First().Type.Name}s in database: ");
+            Console.WriteLine($"All {results.First().Type.PetTypeName}s in database: ");
             foreach (var pet in results)
             {
                 Console.WriteLine(
-                    $"{pet.PetId}{pet.Name}, {pet.Birthdate.ToString()}, {pet.Colors}, {pet.Price}, {pet.Type.Name}, {pet.SoldDate.ToString()}");
+                    $"{pet.PetId}{pet.Name}, {pet.Birthdate.ToString()}, {pet.Colors}, {pet.Price}, {pet.Type.PetTypeName}, {pet.SoldDate.ToString()}");
             }
         }
 
@@ -124,7 +124,7 @@ namespace Truelsen.PetShopApplication.UI
 
         private void UpdatePetDetails()
         {
-            Console.Write("Enter Id of the Pet you want to update: ");
+            Console.Write("Enter UserId of the Pet you want to update: ");
             if (int.TryParse(Console.ReadLine(), out var id))
             {
                 Pet pet = new Pet();
@@ -217,7 +217,7 @@ namespace Truelsen.PetShopApplication.UI
             // If not we will create a new type.
             var petType = new PetType()
             {
-                Name = type
+                PetTypeName = type
             };
             petType = _petTypeService.FindById(petType.PetTypeId.GetValueOrDefault()) ?? _petTypeService.Create(petType);
 
@@ -225,7 +225,7 @@ namespace Truelsen.PetShopApplication.UI
             {
                 Name = petName,
                 Birthdate = Convert.ToDateTime(birthdate),
-                Colors = color,
+                Colors = new List<PetColor>(),
                 Price = Convert.ToDouble(price),
                 Type = petType,
                 SoldDate = DateTime.Now
@@ -248,7 +248,7 @@ namespace Truelsen.PetShopApplication.UI
         {
             while (string.IsNullOrEmpty(inputString))
             {
-                Console.WriteLine("Name can't be empty! Input pet name once more: ");
+                Console.WriteLine("PetTypeName can't be empty! Input pet name once more: ");
                 return false;
             }
 
@@ -324,8 +324,8 @@ namespace Truelsen.PetShopApplication.UI
         public void PrintPetDetails(Pet pet)
         {
             Console.WriteLine(
-                $"Id: {pet.PetId}, Name: {pet.Name}, Birthdate: {pet.Birthdate.ToString()}, Color: {pet.Colors}," +
-                $" Price: {pet.Price}, Pet Type: {pet.Type.Name}, Sold Date: {pet.SoldDate.ToString()}");
+                $"UserId: {pet.PetId}, PetTypeName: {pet.Name}, Birthdate: {pet.Birthdate.ToString()}, Color: {pet.Colors}," +
+                $" Price: {pet.Price}, Pet Type: {pet.Type.PetTypeName}, Sold Date: {pet.SoldDate.ToString()}");
         }
 
         private void TryValidInput()

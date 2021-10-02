@@ -14,8 +14,7 @@ namespace Truelsen.PetShopApplication.Core.Models
         public DateTime SoldDate { get; set; }
         public double Price { get; set; }
         
-        public List<Owner> PreviousOwner { get; set; }
+        public Owner PreviousOwner { get; set; }
         
-        // public Owner PreviousOwner { get; set; }
     }
 }

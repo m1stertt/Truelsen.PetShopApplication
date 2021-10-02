@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Truelsen.PetShopApplication.Core.Models;
 
 namespace Truelsen.PetShopApplication.Infrastructure.EFSql
@@ -12,12 +13,12 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql
 
             var petType1 = ctx.PetTypes.Add(new PetType()
             {
-            Name = "Goat"
+            PetTypeName = "Goat"
             }).Entity;
             
             var petType2 = ctx.PetTypes.Add(new PetType()
             {
-                Name = "Dog"
+                PetTypeName = "Dog"
             }).Entity;
 
             var owner1 = ctx.Owners.Add(new Owner()
@@ -31,12 +32,43 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql
                 FirstName = "Jacob",
                 LastName = "Larsen",
             }).Entity;
+            
+            var color1 = ctx.PetColors.Add(new PetColor()
+            {
+                ColorName = "blue"
+            }).Entity;
+                    
+            var color2 = ctx.PetColors.Add(new PetColor()
+            {
+                ColorName = "black"
+            }).Entity;
+                    
+            var color3 = ctx.PetColors.Add(new PetColor()
+            {
+                ColorName = "green"
+            }).Entity;
+                    
+            var color4 = ctx.PetColors.Add(new PetColor()
+            {
+                ColorName = "white"
+            }).Entity;
+                    
+            var color5 = ctx.PetColors.Add(new PetColor()
+            {
+                ColorName = "yellow"
+            }).Entity;
+                    
+            var color6 = ctx.PetColors.Add(new PetColor()
+            {
+                ColorName = "gray"
+            }).Entity;
+
 
             Pet pet1 = ctx.Pets.Add(new Pet()
             {
                 Name = "Luffi",
                 Birthdate = DateTime.Now,
-                Colors = "Black",
+                Colors = new List<PetColor>(),
                 Price = 5000,
                 Type = petType1,
                 SoldDate = DateTime.Now,
@@ -48,7 +80,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql
             {
                 Name = "Vuffi",
                 Birthdate = DateTime.Now,
-                Colors = "White",
+                Colors = new List<PetColor>(),
                 Price = 150000,
                 Type = petType1,
                 SoldDate = DateTime.Now,
@@ -60,7 +92,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql
             {
                 Name = "Buffi",
                 Birthdate = DateTime.Now,
-                Colors = "Gray",
+                Colors = new List<PetColor>(),
                 Price = 25000,
                 Type = petType2,
                 SoldDate = DateTime.Now,
@@ -72,7 +104,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql
             {
                 Name = "Muffi",
                 Birthdate = DateTime.Now,
-                Colors = "Black",
+                Colors = new List<PetColor>(),
                 Price = 100000,
                 Type = petType2,
                 SoldDate = DateTime.Now,

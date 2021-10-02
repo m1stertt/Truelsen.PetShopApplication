@@ -8,5 +8,6 @@ namespace Truelsen.PetShopApplication.Core.Models
         
         public string ColorName { get; set; }
         
+        public List<Pet> PetColorPets { get; set; }
     }
 }

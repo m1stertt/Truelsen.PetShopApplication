@@ -16,4 +16,8 @@
       <ProjectReference Include="..\Truelsen.PetShopApplication.Domain\Truelsen.PetShopApplication.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Entities" />
+    </ItemGroup>
+
 </Project>

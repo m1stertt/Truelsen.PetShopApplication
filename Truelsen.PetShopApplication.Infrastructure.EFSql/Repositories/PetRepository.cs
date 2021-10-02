@@ -3,7 +3,6 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Truelsen.PetShopApplication.Core.Models;
 using Truelsen.PetShopApplication.Domain.IRepositories;
-using Truelsen.PetShopApplication.Infrastructure.EFSql.Entities;
 
 namespace Truelsen.PetShopApplication.Infrastructure.EFSql.Repositories
 {
@@ -45,22 +44,27 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql.Repositories
 
         public List<Pet> GetAll()
         {
-            return _ctx.Pets.Select(pet => new Pet()
-            {
-                PetId = pet.PetId,
-                Name = pet.Name,
-                Birthdate = pet.Birthdate,
-                Colors = new List<PetColor>(_ctx.PetColors.Select(entity => new PetColor()).Where(pce => pce.PetColorId == pet.PetId )),
-                Price = pet.Price,
-                // Type = new List<PetType>(_ctx.PetTypes.Select(entity => new PetType()).Where(pte => pte.pet == pet.PetId))
-                // PreviousOwner = pet.PreviousOwner,
-                SoldDate = pet.SoldDate
-            }).ToList();
+            // return _ctx.Pets.Select(pet => new Pet()
+            // {
+            //     PetId = pet.PetId,
+            //     PetTypeName = pet.PetTypeName,
+            //     Birthdate = pet.Birthdate,
+            //     Colors = new List<PetColor>(_ctx.PetColors.Select(entity => new PetColor()).Where(pce => pce.PetColorId == pet.PetId )),
+            //     Price = pet.Price,
+            //     // Type = new List<PetType>(_ctx.PetTypes.Select(entity => new PetType()).Where(pte => pte.pet == pet.PetId))
+            //     // PreviousOwner = pet.PreviousOwner,
+            //     SoldDate = pet.SoldDate
+            // }).ToList();
+            
+            return _ctx.Pets
+                .Include(pet => pet.PreviousOwner)
+                .Include(pet => pet.Colors)
+                .ToList();
         }
 
         public List<Pet> GetByType(string type)
         {
-            return _ctx.Pets.Where(pet => pet.Type.Name.Equals(type)).Include(pet => pet.Type)
+            return _ctx.Pets.Where(pet => pet.Type.PetTypeName.Equals(type)).Include(pet => pet.Type)
                 .Include(pet => pet.PreviousOwner).ToList();
         }
 

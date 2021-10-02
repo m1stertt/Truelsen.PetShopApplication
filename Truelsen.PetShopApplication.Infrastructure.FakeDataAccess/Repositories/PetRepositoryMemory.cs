@@ -78,11 +78,11 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
                 PetId = FakeDB.PetId++,
                 Name = "Luffi",
                 Birthdate = DateTime.Now,
-                Colors = "Black",
+                Colors = new List<PetColor>(),
                 Price = 5000,
                 Type = new PetType()
                 {
-                    Name = "Goat"
+                    PetTypeName = "Goat"
                 },
                 SoldDate = DateTime.Now,
                 PreviousOwner = new Owner()
@@ -97,11 +97,11 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
                 PetId = FakeDB.PetId++,
                 Name = "Vuffi",
                 Birthdate = DateTime.Now,
-                Colors = "White",
+                Colors = new List<PetColor>(),
                 Price = 150000,
                 Type = new PetType()
                 {
-                    Name = "Goat"
+                    PetTypeName = "Goat"
                 },
                 SoldDate = DateTime.Now,
                 PreviousOwner = new Owner()
@@ -116,11 +116,11 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
                 PetId = FakeDB.PetId++,
                 Name = "Buffi",
                 Birthdate = DateTime.Now,
-                Colors = "Gray",
+                Colors = new List<PetColor>(),
                 Price = 25000,
                 Type = new PetType()
                 {
-                    Name = "Dog"
+                    PetTypeName = "Dog"
                 },
                 SoldDate = DateTime.Now,
                 PreviousOwner = new Owner()
@@ -135,11 +135,11 @@ namespace Truelsen.PetShopApplication.Infrastructure.DataAccess.Repositories
                 PetId = FakeDB.PetId++,
                 Name = "Muffi",
                 Birthdate = DateTime.Now,
-                Colors = "Black",
+                Colors = new List<PetColor>(),
                 Price = 100000,
                 Type = new PetType()
                 {
-                    Name = "Dog"
+                    PetTypeName = "Dog"
                 },
                 SoldDate = DateTime.Now,
                 PreviousOwner = new Owner()

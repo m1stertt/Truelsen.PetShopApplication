@@ -18,13 +18,13 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql.Repositories
         {
             var entity = new PetType()
             {
-                Name = petType.Name,
+                PetTypeName = petType.PetTypeName,
             };
             var savedEntity = _ctx.Add(entity).Entity;
             _ctx.SaveChanges();
             return new PetType()
             {
-                Name = savedEntity.Name,
+                PetTypeName = savedEntity.PetTypeName,
             };
         }
 
@@ -33,7 +33,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql.Repositories
             return _ctx.PetTypes.Select(petType => new PetType()
             {
                 PetTypeId = petType.PetTypeId,
-                Name = petType.Name,
+                PetTypeName = petType.PetTypeName,
             }).ToList();
         }
 
@@ -41,14 +41,14 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql.Repositories
         {
             var entity = new PetType()
             {
-                Name = petType.Name,
+                PetTypeName = petType.PetTypeName,
             };
             var savedEntity = _ctx.PetTypes.Update(entity).Entity;
             _ctx.SaveChanges();
             return new PetType()
             {
                 PetTypeId = petType.PetTypeId,
-                Name = savedEntity.Name,
+                PetTypeName = savedEntity.PetTypeName,
             };
         }
 
@@ -59,7 +59,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql.Repositories
             return new PetType()
             {
                 PetTypeId = id,
-                Name = savedEntity.Name,
+                PetTypeName = savedEntity.PetTypeName,
             };
         }
 
@@ -68,7 +68,7 @@ namespace Truelsen.PetShopApplication.Infrastructure.EFSql.Repositories
             return _ctx.Pets
                 .Select(petType => new PetType()
                 {
-                    Name = petType.Name,
+                    PetTypeName = petType.Name,
                 })
                 .FirstOrDefault(p => p.PetTypeId == id);
         }

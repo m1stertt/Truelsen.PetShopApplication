@@ -11,7 +11,7 @@ namespace Truelsen.PetShopApplication.Core.Models
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
 
-        public List<Pet> Pets { get; set; }
+        public List<Pet> OwnerPets { get; set; }
 
     }
 }
