@@ -1,0 +1,12 @@
+language: csharp
+mono: none
+dotnet: 2.1
+
+install:
+- dotnet restore
+
+script:
+ - dotnet build
+ - dotnet test XUnitTestProject/XUnitTestProject.csproj
+ - dotnet test NUnitTestProject/NUnitTestProject.csproj
+ - dotnet test MSTestProject/MSTestProject.csproj
